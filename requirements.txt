@@ -1,0 +1,15 @@
+# DO NOT include azure-functions-worker in this file
+# The Python Worker is managed by Azure Functions platform
+# Manually managing azure-functions-worker may cause unexpected issues
+
+numpy==1.24.3
+opencv-python-headless==4.7.0.72
+Pillow==9.5.0
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.0.1+cpu
+torchvision==0.15.2+cpu
+transformers==4.29.2
+scikit-image==0.20.0
+azure-functions==1.14.0
+onnx==1.14.0
+onnxruntime==1.15.1

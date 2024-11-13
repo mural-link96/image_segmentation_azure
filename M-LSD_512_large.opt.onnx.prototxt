@@ -1,0 +1,4019 @@
+ir_version: 7
+producer_name: "tf2onnx+onnx_optimizer"
+producer_version: "1.8.5+0.8"
+model_version: 0
+graph {
+  name: "tf2onnx"
+  node {
+    input: "input_image_with_alpha:0"
+    input: "ConstantFolding/WireFrameModel_with_alpha/tf_op_layer_RealDiv/RealDiv_recip:0"
+    output: "WireFrameModel_with_alpha/tf_op_layer_RealDiv/RealDiv:0"
+    name: "WireFrameModel_with_alpha/tf_op_layer_RealDiv/RealDiv"
+    op_type: "Mul"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/tf_op_layer_RealDiv/RealDiv:0"
+    input: "WireFrameModel_with_alpha/tf_op_layer_Sub/Sub/y:0"
+    output: "WireFrameModel_with_alpha/tf_op_layer_Sub/Sub:0"
+    name: "WireFrameModel_with_alpha/tf_op_layer_Sub/Sub"
+    op_type: "Sub"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/tf_op_layer_Sub/Sub:0"
+    output: "Conv2D__10:0"
+    name: "Conv2D__10"
+    op_type: "Transpose"
+    attribute {
+      name: "perm"
+      ints: 0
+      ints: 3
+      ints: 1
+      ints: 2
+      type: INTS
+    }
+  }
+  node {
+    input: "Conv2D__10:0"
+    input: "Conv2D/filter:0"
+    input: "Add/y:0"
+    output: "Conv__275:0"
+    name: "Conv__275"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 2
+      ints: 2
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    attribute {
+      name: "auto_pad"
+      s: "NOTSET"
+      type: STRING
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__275:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/Conv1_relu/Relu6_WireFrameModel_with_alpha/bn_Conv1/FusedBatchNormV3_WireFrameModel_with_alpha/block_5_project/Conv2D_WireFrameModel_with_alpha/Conv1_with_alpha/Conv2D:0"
+    name: "WireFrameModel_with_alpha/Conv1_relu/Relu6_WireFrameModel_with_alpha/bn_Conv1/FusedBatchNormV3_WireFrameModel_with_alpha/block_5_project/Conv2D_WireFrameModel_with_alpha/Conv1_with_alpha/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/Conv1_relu/Relu6_WireFrameModel_with_alpha/bn_Conv1/FusedBatchNormV3_WireFrameModel_with_alpha/block_5_project/Conv2D_WireFrameModel_with_alpha/Conv1_with_alpha/Conv2D:0"
+    input: "const_fold_opt__409"
+    input: "Add_1/y:0"
+    output: "Conv__276:0"
+    name: "Conv__276"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 32
+      type: INT
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__276:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/expanded_conv_depthwise_relu/Relu6_WireFrameModel_with_alpha/expanded_conv_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/expanded_conv_depthwise/depthwise_WireFrameModel_with_alpha/block_5_project/Conv2D:0"
+    name: "WireFrameModel_with_alpha/expanded_conv_depthwise_relu/Relu6_WireFrameModel_with_alpha/expanded_conv_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/expanded_conv_depthwise/depthwise_WireFrameModel_with_alpha/block_5_project/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/expanded_conv_depthwise_relu/Relu6_WireFrameModel_with_alpha/expanded_conv_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/expanded_conv_depthwise/depthwise_WireFrameModel_with_alpha/block_5_project/Conv2D:0"
+    input: "Conv2D_1/filter:0"
+    input: "WireFrameModel_with_alpha/expanded_conv_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv2d/Conv2D_WireFrameModel_with_alpha/expanded_conv_project/Conv2D1/y:0"
+    output: "Conv__277:0"
+    name: "Conv__277"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__277:0"
+    input: "Conv2D_39/filter:0"
+    input: "Add_39/y:0"
+    output: "Conv__280:0"
+    name: "Conv__280"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__277:0"
+    input: "Conv2D_2/filter:0"
+    input: "Add_2/y:0"
+    output: "Conv__285:0"
+    name: "Conv__285"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__280:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_12/re_lu_12/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_12/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_12/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_12/re_lu_12/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_12/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_12/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "Conv__285:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_1_expand_relu/Relu6_WireFrameModel_with_alpha/block_1_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_WireFrameModel_with_alpha/block_1_expand/Conv2D:0"
+    name: "WireFrameModel_with_alpha/block_1_expand_relu/Relu6_WireFrameModel_with_alpha/block_1_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_WireFrameModel_with_alpha/block_1_expand/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_1_expand_relu/Relu6_WireFrameModel_with_alpha/block_1_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_WireFrameModel_with_alpha/block_1_expand/Conv2D:0"
+    input: "const_fold_opt__419"
+    input: "Add_3/y:0"
+    output: "Conv__288:0"
+    op_type: "Conv"
+    attribute {
+      name: "auto_pad"
+      s: "NOTSET"
+      type: STRING
+    }
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 96
+      type: INT
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 2
+      ints: 2
+      type: INTS
+    }
+  }
+  node {
+    input: "Conv__288:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D:0"
+    name: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D:0"
+    input: "Conv2D_3/filter:0"
+    input: "WireFrameModel_with_alpha/block_1_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_2_project/Conv2D_WireFrameModel_with_alpha/block_1_project/Conv2D1/y:0"
+    output: "Conv__289:0"
+    name: "Conv__289"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__289:0"
+    input: "Conv2D_4/filter:0"
+    input: "Add_4/y:0"
+    output: "Conv__292:0"
+    name: "Conv__292"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__292:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_2_expand_relu/Relu6_WireFrameModel_with_alpha/block_2_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise/depthwise_WireFrameModel_with_alpha/block_2_expand/Conv2D:0"
+    name: "WireFrameModel_with_alpha/block_2_expand_relu/Relu6_WireFrameModel_with_alpha/block_2_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise/depthwise_WireFrameModel_with_alpha/block_2_expand/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_2_expand_relu/Relu6_WireFrameModel_with_alpha/block_2_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise/depthwise_WireFrameModel_with_alpha/block_2_expand/Conv2D:0"
+    input: "const_fold_opt__397"
+    input: "Add_5/y:0"
+    output: "Conv__293:0"
+    name: "Conv__293"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 144
+      type: INT
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__293:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_2_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_2_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise/depthwise_WireFrameModel_with_alpha/block_2_depthwise/depthwise:0"
+    name: "WireFrameModel_with_alpha/block_2_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_2_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise/depthwise_WireFrameModel_with_alpha/block_2_depthwise/depthwise"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_2_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_2_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise/depthwise_WireFrameModel_with_alpha/block_2_depthwise/depthwise:0"
+    input: "Conv2D_5/filter:0"
+    input: "WireFrameModel_with_alpha/block_2_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_2_project/Conv2D1/y:0"
+    output: "Conv__294:0"
+    name: "Conv__294"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__289:0"
+    input: "Conv__294:0"
+    output: "WireFrameModel_with_alpha/block_2_add/add:0"
+    name: "WireFrameModel_with_alpha/block_2_add/add"
+    op_type: "Add"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_2_add/add:0"
+    input: "Conv2D_6/filter:0"
+    input: "Add_6/y:0"
+    output: "Conv__295:0"
+    name: "Conv__295"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_2_add/add:0"
+    input: "Conv2D_35/filter:0"
+    input: "Add_35/y:0"
+    output: "Conv__372:0"
+    name: "Conv__372"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__295:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_3_expand_relu/Relu6_WireFrameModel_with_alpha/block_3_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise/depthwise_WireFrameModel_with_alpha/block_3_expand/Conv2D:0"
+    name: "WireFrameModel_with_alpha/block_3_expand_relu/Relu6_WireFrameModel_with_alpha/block_3_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise/depthwise_WireFrameModel_with_alpha/block_3_expand/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "Conv__372:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_8/re_lu_8/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_8/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_8/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_8/re_lu_8/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_8/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_8/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_3_expand_relu/Relu6_WireFrameModel_with_alpha/block_3_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise/depthwise_WireFrameModel_with_alpha/block_3_expand/Conv2D:0"
+    input: "const_fold_opt__396"
+    input: "Add_7/y:0"
+    output: "Conv__298:0"
+    op_type: "Conv"
+    attribute {
+      name: "auto_pad"
+      s: "NOTSET"
+      type: STRING
+    }
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 144
+      type: INT
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 2
+      ints: 2
+      type: INTS
+    }
+  }
+  node {
+    input: "Conv__298:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_3_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_3_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise/depthwise:0"
+    name: "WireFrameModel_with_alpha/block_3_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_3_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise/depthwise"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_3_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_3_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_3_depthwise/depthwise:0"
+    input: "Conv2D_7/filter:0"
+    input: "WireFrameModel_with_alpha/block_3_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_5_project/Conv2D_WireFrameModel_with_alpha/block_3_project/Conv2D1/y:0"
+    output: "Conv__299:0"
+    name: "Conv__299"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__299:0"
+    input: "Conv2D_8/filter:0"
+    input: "Add_8/y:0"
+    output: "Conv__302:0"
+    name: "Conv__302"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__302:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D:0"
+    name: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D:0"
+    input: "const_fold_opt__400"
+    input: "Add_9/y:0"
+    output: "Conv__303:0"
+    name: "Conv__303"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 192
+      type: INT
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__303:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_4_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_4_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_depthwise/depthwise:0"
+    name: "WireFrameModel_with_alpha/block_4_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_4_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_depthwise/depthwise"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_4_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_4_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_depthwise/depthwise:0"
+    input: "Conv2D_9/filter:0"
+    input: "WireFrameModel_with_alpha/block_4_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_5_project/Conv2D_WireFrameModel_with_alpha/block_4_project/Conv2D1/y:0"
+    output: "Conv__304:0"
+    name: "Conv__304"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__299:0"
+    input: "Conv__304:0"
+    output: "WireFrameModel_with_alpha/block_4_add/add:0"
+    name: "WireFrameModel_with_alpha/block_4_add/add"
+    op_type: "Add"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_4_add/add:0"
+    input: "Conv2D_10/filter:0"
+    input: "Add_10/y:0"
+    output: "Conv__307:0"
+    name: "Conv__307"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__307:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_5_expand_relu/Relu6_WireFrameModel_with_alpha/block_5_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_5_expand/Conv2D:0"
+    name: "WireFrameModel_with_alpha/block_5_expand_relu/Relu6_WireFrameModel_with_alpha/block_5_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_5_expand/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_5_expand_relu/Relu6_WireFrameModel_with_alpha/block_5_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_5_expand/Conv2D:0"
+    input: "const_fold_opt__398"
+    input: "Add_11/y:0"
+    output: "Conv__308:0"
+    name: "Conv__308"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 192
+      type: INT
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__308:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_5_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_5_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_5_depthwise/depthwise:0"
+    name: "WireFrameModel_with_alpha/block_5_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_5_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_5_depthwise/depthwise"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_5_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_5_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_5_depthwise/depthwise:0"
+    input: "Conv2D_11/filter:0"
+    input: "WireFrameModel_with_alpha/block_5_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_5_project/Conv2D1/y:0"
+    output: "Conv__309:0"
+    name: "Conv__309"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_4_add/add:0"
+    input: "Conv__309:0"
+    output: "WireFrameModel_with_alpha/block_5_add/add:0"
+    name: "WireFrameModel_with_alpha/block_5_add/add"
+    op_type: "Add"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_5_add/add:0"
+    input: "Conv2D_31/filter:0"
+    input: "Add_31/y:0"
+    output: "Conv__310:0"
+    name: "Conv__310"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_5_add/add:0"
+    input: "Conv2D_12/filter:0"
+    input: "Add_12/y:0"
+    output: "Conv__315:0"
+    name: "Conv__315"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__310:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_4/re_lu_4/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_4/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_4/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_4/re_lu_4/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_4/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_4/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "Conv__315:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_6_expand_relu/Relu6_WireFrameModel_with_alpha/block_6_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_6_expand/Conv2D:0"
+    name: "WireFrameModel_with_alpha/block_6_expand_relu/Relu6_WireFrameModel_with_alpha/block_6_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_6_expand/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_6_expand_relu/Relu6_WireFrameModel_with_alpha/block_6_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_6_expand/Conv2D:0"
+    input: "const_fold_opt__415"
+    input: "Add_13/y:0"
+    output: "Conv__318:0"
+    op_type: "Conv"
+    attribute {
+      name: "auto_pad"
+      s: "NOTSET"
+      type: STRING
+    }
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 192
+      type: INT
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 2
+      ints: 2
+      type: INTS
+    }
+  }
+  node {
+    input: "Conv__318:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_6_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise:0"
+    name: "WireFrameModel_with_alpha/block_6_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_6_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise:0"
+    input: "Conv2D_13/filter:0"
+    input: "WireFrameModel_with_alpha/block_6_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/block_6_project/Conv2D1/y:0"
+    output: "Conv__319:0"
+    name: "Conv__319"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__319:0"
+    input: "Conv2D_14/filter:0"
+    input: "Add_14/y:0"
+    output: "Conv__322:0"
+    name: "Conv__322"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__322:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_7_expand_relu/Relu6_WireFrameModel_with_alpha/block_7_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_7_expand/Conv2D:0"
+    name: "WireFrameModel_with_alpha/block_7_expand_relu/Relu6_WireFrameModel_with_alpha/block_7_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_7_expand/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_7_expand_relu/Relu6_WireFrameModel_with_alpha/block_7_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_7_expand/Conv2D:0"
+    input: "const_fold_opt__414"
+    input: "Add_15/y:0"
+    output: "Conv__323:0"
+    name: "Conv__323"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 384
+      type: INT
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__323:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_7_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_7_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_7_depthwise/depthwise:0"
+    name: "WireFrameModel_with_alpha/block_7_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_7_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_7_depthwise/depthwise"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_7_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_7_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_7_depthwise/depthwise:0"
+    input: "Conv2D_15/filter:0"
+    input: "WireFrameModel_with_alpha/block_7_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/block_7_project/Conv2D1/y:0"
+    output: "Conv__324:0"
+    name: "Conv__324"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__319:0"
+    input: "Conv__324:0"
+    output: "WireFrameModel_with_alpha/block_7_add/add:0"
+    name: "WireFrameModel_with_alpha/block_7_add/add"
+    op_type: "Add"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_7_add/add:0"
+    input: "Conv2D_16/filter:0"
+    input: "Add_16/y:0"
+    output: "Conv__327:0"
+    name: "Conv__327"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__327:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_8_expand_relu/Relu6_WireFrameModel_with_alpha/block_8_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_8_expand/Conv2D:0"
+    name: "WireFrameModel_with_alpha/block_8_expand_relu/Relu6_WireFrameModel_with_alpha/block_8_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_8_expand/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_8_expand_relu/Relu6_WireFrameModel_with_alpha/block_8_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_8_expand/Conv2D:0"
+    input: "const_fold_opt__413"
+    input: "Add_17/y:0"
+    output: "Conv__328:0"
+    name: "Conv__328"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 384
+      type: INT
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__328:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_8_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_8_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_8_depthwise/depthwise:0"
+    name: "WireFrameModel_with_alpha/block_8_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_8_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_8_depthwise/depthwise"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_8_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_8_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_8_depthwise/depthwise:0"
+    input: "Conv2D_17/filter:0"
+    input: "WireFrameModel_with_alpha/block_8_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/block_8_project/Conv2D1/y:0"
+    output: "Conv__329:0"
+    name: "Conv__329"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_7_add/add:0"
+    input: "Conv__329:0"
+    output: "WireFrameModel_with_alpha/block_8_add/add:0"
+    name: "WireFrameModel_with_alpha/block_8_add/add"
+    op_type: "Add"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_8_add/add:0"
+    input: "Conv2D_18/filter:0"
+    input: "Add_18/y:0"
+    output: "Conv__332:0"
+    name: "Conv__332"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__332:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_9_expand_relu/Relu6_WireFrameModel_with_alpha/block_9_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_9_expand/Conv2D:0"
+    name: "WireFrameModel_with_alpha/block_9_expand_relu/Relu6_WireFrameModel_with_alpha/block_9_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_9_expand/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_9_expand_relu/Relu6_WireFrameModel_with_alpha/block_9_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_9_expand/Conv2D:0"
+    input: "const_fold_opt__403"
+    input: "Add_19/y:0"
+    output: "Conv__333:0"
+    name: "Conv__333"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 384
+      type: INT
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__333:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_9_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_9_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_9_depthwise/depthwise:0"
+    name: "WireFrameModel_with_alpha/block_9_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_9_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_9_depthwise/depthwise"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_9_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_9_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_9_depthwise/depthwise:0"
+    input: "Conv2D_19/filter:0"
+    input: "WireFrameModel_with_alpha/block_9_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/block_9_project/Conv2D1/y:0"
+    output: "Conv__334:0"
+    name: "Conv__334"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_8_add/add:0"
+    input: "Conv__334:0"
+    output: "WireFrameModel_with_alpha/block_9_add/add:0"
+    name: "WireFrameModel_with_alpha/block_9_add/add"
+    op_type: "Add"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_9_add/add:0"
+    input: "Conv2D_27/filter:0"
+    input: "Add_27/y:0"
+    output: "Conv__335:0"
+    name: "Conv__335"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_9_add/add:0"
+    input: "Conv2D_20/filter:0"
+    input: "Add_20/y:0"
+    output: "Conv__340:0"
+    name: "Conv__340"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__335:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act/re_lu/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act/re_lu/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "Conv__340:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_10_expand_relu/Relu6_WireFrameModel_with_alpha/block_10_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_10_expand/Conv2D:0"
+    name: "WireFrameModel_with_alpha/block_10_expand_relu/Relu6_WireFrameModel_with_alpha/block_10_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_10_expand/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_10_expand_relu/Relu6_WireFrameModel_with_alpha/block_10_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise_WireFrameModel_with_alpha/block_10_expand/Conv2D:0"
+    input: "const_fold_opt__407"
+    input: "Add_21/y:0"
+    output: "Conv__341:0"
+    name: "Conv__341"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 384
+      type: INT
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__341:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_10_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise:0"
+    name: "WireFrameModel_with_alpha/block_10_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_10_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_10_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_10_depthwise/depthwise:0"
+    input: "Conv2D_21/filter:0"
+    input: "WireFrameModel_with_alpha/block_10_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_project/Conv2D_WireFrameModel_with_alpha/block_10_project/Conv2D1/y:0"
+    output: "Conv__342:0"
+    name: "Conv__342"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__342:0"
+    input: "Conv2D_22/filter:0"
+    input: "Add_22/y:0"
+    output: "Conv__345:0"
+    name: "Conv__345"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__345:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_11_expand_relu/Relu6_WireFrameModel_with_alpha/block_11_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise/depthwise_WireFrameModel_with_alpha/block_11_expand/Conv2D:0"
+    name: "WireFrameModel_with_alpha/block_11_expand_relu/Relu6_WireFrameModel_with_alpha/block_11_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise/depthwise_WireFrameModel_with_alpha/block_11_expand/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_11_expand_relu/Relu6_WireFrameModel_with_alpha/block_11_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise/depthwise_WireFrameModel_with_alpha/block_11_expand/Conv2D:0"
+    input: "const_fold_opt__405"
+    input: "Add_23/y:0"
+    output: "Conv__346:0"
+    name: "Conv__346"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 576
+      type: INT
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__346:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_11_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_11_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise/depthwise_WireFrameModel_with_alpha/block_11_depthwise/depthwise:0"
+    name: "WireFrameModel_with_alpha/block_11_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_11_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise/depthwise_WireFrameModel_with_alpha/block_11_depthwise/depthwise"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_11_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_11_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise/depthwise_WireFrameModel_with_alpha/block_11_depthwise/depthwise:0"
+    input: "Conv2D_23/filter:0"
+    input: "WireFrameModel_with_alpha/block_11_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_project/Conv2D_WireFrameModel_with_alpha/block_11_project/Conv2D1/y:0"
+    output: "Conv__347:0"
+    name: "Conv__347"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__342:0"
+    input: "Conv__347:0"
+    output: "WireFrameModel_with_alpha/block_11_add/add:0"
+    name: "WireFrameModel_with_alpha/block_11_add/add"
+    op_type: "Add"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_11_add/add:0"
+    input: "Conv2D_24/filter:0"
+    input: "Add_24/y:0"
+    output: "Conv__350:0"
+    name: "Conv__350"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__350:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_12_expand_relu/Relu6_WireFrameModel_with_alpha/block_12_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise/depthwise_WireFrameModel_with_alpha/block_12_expand/Conv2D:0"
+    name: "WireFrameModel_with_alpha/block_12_expand_relu/Relu6_WireFrameModel_with_alpha/block_12_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise/depthwise_WireFrameModel_with_alpha/block_12_expand/Conv2D"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_12_expand_relu/Relu6_WireFrameModel_with_alpha/block_12_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise/depthwise_WireFrameModel_with_alpha/block_12_expand/Conv2D:0"
+    input: "const_fold_opt__401"
+    input: "Add_25/y:0"
+    output: "Conv__351:0"
+    name: "Conv__351"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 576
+      type: INT
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__351:0"
+    input: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+    input: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+    output: "WireFrameModel_with_alpha/block_12_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_12_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise/depthwise:0"
+    name: "WireFrameModel_with_alpha/block_12_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_12_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise/depthwise"
+    op_type: "Clip"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_12_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_12_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_depthwise/depthwise:0"
+    input: "Conv2D_25/filter:0"
+    input: "WireFrameModel_with_alpha/block_12_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_project/Conv2D1/y:0"
+    output: "Conv__352:0"
+    name: "Conv__352"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_11_add/add:0"
+    input: "Conv__352:0"
+    output: "WireFrameModel_with_alpha/block_12_add/add:0"
+    name: "WireFrameModel_with_alpha/block_12_add/add"
+    op_type: "Add"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/block_12_add/add:0"
+    input: "Conv2D_26/filter:0"
+    input: "Add_26/y:0"
+    output: "Conv__353:0"
+    name: "Conv__353"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__353:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_1/re_lu_1/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_1/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_1/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_1/re_lu_1/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_1/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_1/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act/re_lu/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act/conv/Conv2D:0"
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_1/re_lu_1/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_1/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_1/conv/Conv2D:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock/concat:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock/concat"
+    op_type: "Concat"
+    attribute {
+      name: "axis"
+      i: 1
+      type: INT
+    }
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock/concat:0"
+    input: "Conv2D_28/filter:0"
+    input: "Add_28/y:0"
+    output: "Conv__354:0"
+    name: "Conv__354"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__354:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_2/re_lu_2/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_2/bn/FusedBatchNormV3_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_2/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_2/re_lu_2/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_2/bn/FusedBatchNormV3_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_2/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_2/re_lu_2/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_2/bn/FusedBatchNormV3_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_2/conv/Conv2D:0"
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock/concat:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock/add:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock/add"
+    op_type: "Add"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock/add:0"
+    input: "Conv2D_29/filter:0"
+    input: "Add_29/y:0"
+    output: "Conv__355:0"
+    name: "Conv__355"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__355:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock/re_lu_3/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_3/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_3/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock/re_lu_3/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_3/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_3/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock/re_lu_3/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_3/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock/conv_bn__act_3/conv/Conv2D:0"
+    input: "const_empty_float__222"
+    input: "const_empty_float__222"
+    input: "opt_Concat__211:0"
+    output: "Resize__212:0"
+    name: "Resize__212"
+    op_type: "Resize"
+    attribute {
+      name: "coordinate_transformation_mode"
+      s: "half_pixel"
+      type: STRING
+    }
+    attribute {
+      name: "exclude_outside"
+      i: 0
+      type: INT
+    }
+    attribute {
+      name: "mode"
+      s: "linear"
+      type: STRING
+    }
+    attribute {
+      name: "nearest_mode"
+      s: "floor"
+      type: STRING
+    }
+    domain: ""
+  }
+  node {
+    input: "Resize__212:0"
+    input: "Conv2D_30/filter:0"
+    input: "Add_30/y:0"
+    output: "Conv__356:0"
+    name: "Conv__356"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__356:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_5/re_lu_5/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_5/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_5/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_5/re_lu_5/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_5/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_5/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_4/re_lu_4/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_4/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_4/conv/Conv2D:0"
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_5/re_lu_5/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_5/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_5/conv/Conv2D:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/concat:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/concat"
+    op_type: "Concat"
+    attribute {
+      name: "axis"
+      i: 1
+      type: INT
+    }
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/concat:0"
+    input: "Conv2D_32/filter:0"
+    input: "Add_32/y:0"
+    output: "Conv__361:0"
+    name: "Conv__361"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__361:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_6/re_lu_6/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_6/bn/FusedBatchNormV3_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_6/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_6/re_lu_6/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_6/bn/FusedBatchNormV3_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_6/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_6/re_lu_6/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_6/bn/FusedBatchNormV3_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_6/conv/Conv2D:0"
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/concat:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/add:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/add"
+    op_type: "Add"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/add:0"
+    input: "Conv2D_33/filter:0"
+    input: "Add_33/y:0"
+    output: "Conv__362:0"
+    name: "Conv__362"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__362:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/re_lu_7/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_7/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_7/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/re_lu_7/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_7/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_7/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_1/re_lu_7/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_7/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_1/conv_bn__act_7/conv/Conv2D:0"
+    input: "const_empty_float__222"
+    input: "const_empty_float__222"
+    input: "opt_Concat__227:0"
+    output: "Resize__228:0"
+    name: "Resize__228"
+    op_type: "Resize"
+    attribute {
+      name: "coordinate_transformation_mode"
+      s: "half_pixel"
+      type: STRING
+    }
+    attribute {
+      name: "exclude_outside"
+      i: 0
+      type: INT
+    }
+    attribute {
+      name: "mode"
+      s: "linear"
+      type: STRING
+    }
+    attribute {
+      name: "nearest_mode"
+      s: "floor"
+      type: STRING
+    }
+    domain: ""
+  }
+  node {
+    input: "Resize__228:0"
+    input: "Conv2D_34/filter:0"
+    input: "Add_34/y:0"
+    output: "Conv__363:0"
+    name: "Conv__363"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__363:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_9/re_lu_9/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_9/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_9/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_9/re_lu_9/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_9/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_9/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_8/re_lu_8/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_8/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_8/conv/Conv2D:0"
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_9/re_lu_9/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_9/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_9/conv/Conv2D:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/concat:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/concat"
+    op_type: "Concat"
+    attribute {
+      name: "axis"
+      i: 1
+      type: INT
+    }
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/concat:0"
+    input: "Conv2D_36/filter:0"
+    input: "Add_36/y:0"
+    output: "Conv__373:0"
+    name: "Conv__373"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__373:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_10/re_lu_10/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_10/bn/FusedBatchNormV3_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_10/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_10/re_lu_10/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_10/bn/FusedBatchNormV3_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_10/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_10/re_lu_10/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_10/bn/FusedBatchNormV3_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_10/conv/Conv2D:0"
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/concat:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/add:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/add"
+    op_type: "Add"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/add:0"
+    input: "Conv2D_37/filter:0"
+    input: "Add_37/y:0"
+    output: "Conv__374:0"
+    name: "Conv__374"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__374:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/re_lu_11/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_11/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_11/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/re_lu_11/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_11/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_11/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_2/re_lu_11/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_11/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_2/conv_bn__act_11/conv/Conv2D:0"
+    input: "const_empty_float__222"
+    input: "const_empty_float__222"
+    input: "opt_Concat__245:0"
+    output: "Resize__246:0"
+    name: "Resize__246"
+    op_type: "Resize"
+    attribute {
+      name: "coordinate_transformation_mode"
+      s: "half_pixel"
+      type: STRING
+    }
+    attribute {
+      name: "exclude_outside"
+      i: 0
+      type: INT
+    }
+    attribute {
+      name: "mode"
+      s: "linear"
+      type: STRING
+    }
+    attribute {
+      name: "nearest_mode"
+      s: "floor"
+      type: STRING
+    }
+    domain: ""
+  }
+  node {
+    input: "Resize__246:0"
+    input: "Conv2D_38/filter:0"
+    input: "Add_38/y:0"
+    output: "Conv__375:0"
+    name: "Conv__375"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__375:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_13/re_lu_13/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_13/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_13/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_13/re_lu_13/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_13/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_13/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_12/re_lu_12/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_12/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_12/conv/Conv2D:0"
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_13/re_lu_13/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_13/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_13/conv/Conv2D:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/concat:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/concat"
+    op_type: "Concat"
+    attribute {
+      name: "axis"
+      i: 1
+      type: INT
+    }
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/concat:0"
+    input: "Conv2D_40/filter:0"
+    input: "Add_40/y:0"
+    output: "Conv__380:0"
+    name: "Conv__380"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__380:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/re_lu_14/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/bn/FusedBatchNormV3_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/re_lu_14/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/bn/FusedBatchNormV3_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/re_lu_14/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/bn/FusedBatchNormV3_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_14/conv/Conv2D:0"
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/concat:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/add:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/add"
+    op_type: "Add"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/add:0"
+    input: "Conv2D_41/filter:0"
+    input: "Add_41/y:0"
+    output: "Conv__381:0"
+    name: "Conv__381"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__381:0"
+    output: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/re_lu_15/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_15/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_15/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/re_lu_15/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_15/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_15/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/decoder_fpn/upblock_3/re_lu_15/Relu_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_15/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/decoder_fpn/upblock_3/conv_bn__act_15/conv/Conv2D:0"
+    input: "Conv2D_42/filter:0"
+    input: "Add_42/y:0"
+    output: "Conv__382:0"
+    name: "Conv__382"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 5
+      ints: 5
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 5
+      ints: 5
+      ints: 5
+      ints: 5
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__382:0"
+    output: "WireFrameModel_with_alpha/Decoder/conv_bn__act_16/re_lu_16/Relu_WireFrameModel_with_alpha/Decoder/conv_bn__act_16/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/Decoder/conv_bn__act_16/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/Decoder/conv_bn__act_16/re_lu_16/Relu_WireFrameModel_with_alpha/Decoder/conv_bn__act_16/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/Decoder/conv_bn__act_16/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/Decoder/conv_bn__act_16/re_lu_16/Relu_WireFrameModel_with_alpha/Decoder/conv_bn__act_16/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/Decoder/conv_bn__act_16/conv/Conv2D:0"
+    input: "Conv2D_43/filter:0"
+    input: "Add_43/y:0"
+    output: "Conv__383:0"
+    name: "Conv__383"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__383:0"
+    output: "WireFrameModel_with_alpha/Decoder/conv_bn__act_17/re_lu_17/Relu_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D:0"
+    name: "WireFrameModel_with_alpha/Decoder/conv_bn__act_17/re_lu_17/Relu_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D"
+    op_type: "Relu"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/Decoder/conv_bn__act_17/re_lu_17/Relu_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/bn/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D:0"
+    input: "Conv2D_44/filter:0"
+    input: "WireFrameModel_with_alpha/Decoder/conv2d/BiasAdd_WireFrameModel_with_alpha/Decoder/conv2d/Conv2D_WireFrameModel_with_alpha/Decoder/conv2d/BiasAdd/ReadVariableOp/resource1/y:0"
+    output: "Conv__384:0"
+    name: "Conv__384"
+    op_type: "Conv"
+    attribute {
+      name: "dilations"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 0
+      ints: 0
+      ints: 0
+      ints: 0
+      type: INTS
+    }
+    attribute {
+      name: "group"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Conv__384:0"
+    input: "const_starts__272"
+    input: "const_ends__273"
+    input: "const_axes__261"
+    output: "Identity_2_raw_output___8:0"
+    name: "Identity_2"
+    op_type: "Slice"
+    domain: ""
+  }
+  node {
+    input: "Conv__384:0"
+    input: "const_starts__259"
+    input: "const_ends__260"
+    input: "const_axes__261"
+    output: "WireFrameModel_with_alpha/Decoder/strided_slice_41:0"
+    name: "WireFrameModel_with_alpha/Decoder/strided_slice_41"
+    op_type: "Slice"
+    domain: ""
+  }
+  node {
+    input: "Identity_2_raw_output___8:0"
+    output: "Identity_2"
+    name: "Transpose__385"
+    op_type: "Transpose"
+    attribute {
+      name: "perm"
+      ints: 0
+      ints: 2
+      ints: 3
+      ints: 1
+      type: INTS
+    }
+    domain: ""
+  }
+  node {
+    input: "WireFrameModel_with_alpha/Decoder/strided_slice_41:0"
+    output: "WireFrameModel_with_alpha/Decoder/Sigmoid_4:0"
+    name: "WireFrameModel_with_alpha/Decoder/Sigmoid_4"
+    op_type: "Sigmoid"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/Decoder/Sigmoid_4:0"
+    input: "new_shape__391"
+    output: "Transpose__387:0"
+    name: "Transpose__387"
+    op_type: "Reshape"
+    domain: ""
+  }
+  node {
+    input: "WireFrameModel_with_alpha/Decoder/Sigmoid_4:0"
+    output: "WireFrameModel_with_alpha/Decoder/max_pooling2d/MaxPool:0"
+    name: "WireFrameModel_with_alpha/Decoder/max_pooling2d/MaxPool"
+    op_type: "MaxPool"
+    attribute {
+      name: "strides"
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+    attribute {
+      name: "kernel_shape"
+      ints: 3
+      ints: 3
+      type: INTS
+    }
+    attribute {
+      name: "pads"
+      ints: 1
+      ints: 1
+      ints: 1
+      ints: 1
+      type: INTS
+    }
+  }
+  node {
+    input: "WireFrameModel_with_alpha/Decoder/max_pooling2d/MaxPool:0"
+    input: "new_shape__391"
+    output: "WireFrameModel_with_alpha/Decoder/max_pooling2d/MaxPool__263:0"
+    name: "WireFrameModel_with_alpha/Decoder/max_pooling2d/MaxPool__263"
+    op_type: "Reshape"
+    domain: ""
+  }
+  node {
+    input: "Transpose__387:0"
+    input: "WireFrameModel_with_alpha/Decoder/max_pooling2d/MaxPool__263:0"
+    output: "WireFrameModel_with_alpha/Decoder/Equal:0"
+    name: "WireFrameModel_with_alpha/Decoder/Equal"
+    op_type: "Equal"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/Decoder/Equal:0"
+    output: "WireFrameModel_with_alpha/Decoder/Cast:0"
+    name: "WireFrameModel_with_alpha/Decoder/Cast"
+    op_type: "Cast"
+    attribute {
+      name: "to"
+      i: 1
+      type: INT
+    }
+  }
+  node {
+    input: "Transpose__387:0"
+    input: "WireFrameModel_with_alpha/Decoder/Cast:0"
+    output: "WireFrameModel_with_alpha/Decoder/mul:0"
+    name: "WireFrameModel_with_alpha/Decoder/mul"
+    op_type: "Mul"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/Decoder/mul:0"
+    input: "const_fold_opt__392"
+    output: "WireFrameModel_with_alpha/Decoder/Reshape:0"
+    name: "WireFrameModel_with_alpha/Decoder/Reshape"
+    op_type: "Reshape"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/Decoder/Reshape:0"
+    input: "const_fold_opt__420"
+    output: "Identity_1"
+    output: "Identity_1:1"
+    name: "Identity_1"
+    op_type: "TopK"
+    attribute {
+      name: "sorted"
+      i: 1
+      type: INT
+    }
+    domain: ""
+  }
+  node {
+    input: "Identity_1:1"
+    output: "Identity_1__267:0"
+    name: "Identity_1__267"
+    op_type: "Cast"
+    attribute {
+      name: "to"
+      i: 6
+      type: INT
+    }
+  }
+  node {
+    input: "Identity_1__267:0"
+    input: "WireFrameModel_with_alpha/Decoder/floordiv/y:0"
+    output: "Div__268:0"
+    name: "Div__268"
+    op_type: "Div"
+    domain: ""
+  }
+  node {
+    input: "Div__268:0"
+    input: "WireFrameModel_with_alpha/Decoder/floordiv/y:0"
+    output: "Mul__269:0"
+    name: "Mul__269"
+    op_type: "Mul"
+    domain: ""
+  }
+  node {
+    input: "Div__268:0"
+    input: "const_fold_opt__395"
+    output: "WireFrameModel_with_alpha/Decoder/ExpandDims:0"
+    name: "WireFrameModel_with_alpha/Decoder/ExpandDims"
+    op_type: "Reshape"
+  }
+  node {
+    input: "Identity_1__267:0"
+    input: "Mul__269:0"
+    output: "WireFrameModel_with_alpha/Decoder/mod:0"
+    name: "WireFrameModel_with_alpha/Decoder/mod"
+    op_type: "Sub"
+    domain: ""
+  }
+  node {
+    input: "WireFrameModel_with_alpha/Decoder/mod:0"
+    input: "const_fold_opt__395"
+    output: "WireFrameModel_with_alpha/Decoder/ExpandDims_11:0"
+    name: "WireFrameModel_with_alpha/Decoder/ExpandDims_11"
+    op_type: "Reshape"
+  }
+  node {
+    input: "WireFrameModel_with_alpha/Decoder/ExpandDims:0"
+    input: "WireFrameModel_with_alpha/Decoder/ExpandDims_11:0"
+    output: "Identity"
+    name: "Identity"
+    op_type: "Concat"
+    attribute {
+      name: "axis"
+      i: 2
+      type: INT
+    }
+    domain: ""
+  }
+  initializer {
+      dims: 4
+      data_type: 7
+      name: "new_shape__391"
+  }
+  initializer {
+      dims: 4
+      data_type: 7
+      name: "const_starts__272"
+  }
+  initializer {
+      dims: 4
+      data_type: 7
+      name: "const_starts__259"
+  }
+  initializer {
+      dims: 1
+      data_type: 7
+      name: "const_fold_opt__420"
+  }
+  initializer {
+      dims: 96
+      dims: 1
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "const_fold_opt__419"
+  }
+  initializer {
+      dims: 192
+      dims: 1
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "const_fold_opt__415"
+  }
+  initializer {
+      dims: 384
+      dims: 1
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "const_fold_opt__414"
+  }
+  initializer {
+      dims: 384
+      dims: 1
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "const_fold_opt__413"
+  }
+  initializer {
+      dims: 32
+      dims: 1
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "const_fold_opt__409"
+  }
+  initializer {
+      dims: 384
+      dims: 1
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "const_fold_opt__407"
+  }
+  initializer {
+      dims: 576
+      dims: 1
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "const_fold_opt__405"
+  }
+  initializer {
+      dims: 384
+      dims: 1
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "const_fold_opt__403"
+  }
+  initializer {
+      dims: 576
+      dims: 1
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "const_fold_opt__401"
+  }
+  initializer {
+      dims: 192
+      dims: 1
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "const_fold_opt__400"
+  }
+  initializer {
+      dims: 192
+      dims: 1
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "const_fold_opt__398"
+  }
+  initializer {
+      dims: 144
+      dims: 1
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "const_fold_opt__397"
+  }
+  initializer {
+      dims: 144
+      dims: 1
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "const_fold_opt__396"
+  }
+  initializer {
+      dims: 3
+      data_type: 7
+      name: "const_fold_opt__395"
+  }
+  initializer {
+      dims: 2
+      data_type: 7
+      name: "const_fold_opt__392"
+  }
+  initializer {
+      dims: 4
+      data_type: 7
+      name: "const_ends__273"
+  }
+  initializer {
+      dims: 4
+      data_type: 7
+      name: "const_ends__260"
+  }
+  initializer {
+      dims: 0
+      data_type: 1
+      name: "const_empty_float__222"
+  }
+  initializer {
+      dims: 4
+      data_type: 7
+      name: "const_axes__261"
+  }
+  initializer {
+      data_type: 1
+      name: "WireFrameModel_with_alpha/tf_op_layer_Sub/Sub/y:0"
+  }
+  initializer {
+      dims: 16
+      data_type: 1
+      name: "WireFrameModel_with_alpha/expanded_conv_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv2d/Conv2D_WireFrameModel_with_alpha/expanded_conv_project/Conv2D1/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "WireFrameModel_with_alpha/block_9_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/block_9_project/Conv2D1/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "WireFrameModel_with_alpha/block_8_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/block_8_project/Conv2D1/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "WireFrameModel_with_alpha/block_7_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/block_7_project/Conv2D1/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "WireFrameModel_with_alpha/block_6_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/Decoder/conv_bn__act_17/conv/Conv2D_WireFrameModel_with_alpha/block_6_project/Conv2D1/y:0"
+  }
+  initializer {
+      dims: 32
+      data_type: 1
+      name: "WireFrameModel_with_alpha/block_5_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_5_project/Conv2D1/y:0"
+  }
+  initializer {
+      dims: 32
+      data_type: 1
+      name: "WireFrameModel_with_alpha/block_4_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_5_project/Conv2D_WireFrameModel_with_alpha/block_4_project/Conv2D1/y:0"
+  }
+  initializer {
+      data_type: 1
+      name: "WireFrameModel_with_alpha/block_4_expand_relu/Relu6_WireFrameModel_with_alpha/block_4_expand_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_6_depthwise/depthwise_WireFrameModel_with_alpha/block_4_expand/Conv2D_max__75"
+  }
+  initializer {
+      dims: 32
+      data_type: 1
+      name: "WireFrameModel_with_alpha/block_3_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_5_project/Conv2D_WireFrameModel_with_alpha/block_3_project/Conv2D1/y:0"
+  }
+  initializer {
+      dims: 24
+      data_type: 1
+      name: "WireFrameModel_with_alpha/block_2_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_2_project/Conv2D1/y:0"
+  }
+  initializer {
+      dims: 24
+      data_type: 1
+      name: "WireFrameModel_with_alpha/block_1_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_2_project/Conv2D_WireFrameModel_with_alpha/block_1_project/Conv2D1/y:0"
+  }
+  initializer {
+      data_type: 1
+      name: "WireFrameModel_with_alpha/block_1_depthwise_relu/Relu6_WireFrameModel_with_alpha/block_1_depthwise_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_1_depthwise/depthwise_WireFrameModel_with_alpha/block_12_project/Conv2D_min__38"
+  }
+  initializer {
+      dims: 96
+      data_type: 1
+      name: "WireFrameModel_with_alpha/block_12_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_project/Conv2D1/y:0"
+  }
+  initializer {
+      dims: 96
+      data_type: 1
+      name: "WireFrameModel_with_alpha/block_11_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_project/Conv2D_WireFrameModel_with_alpha/block_11_project/Conv2D1/y:0"
+  }
+  initializer {
+      dims: 96
+      data_type: 1
+      name: "WireFrameModel_with_alpha/block_10_project_BN/FusedBatchNormV3_WireFrameModel_with_alpha/block_12_project/Conv2D_WireFrameModel_with_alpha/block_10_project/Conv2D1/y:0"
+  }
+  initializer {
+      data_type: 6
+      name: "WireFrameModel_with_alpha/Decoder/floordiv/y:0"
+  }
+  initializer {
+      dims: 16
+      data_type: 1
+      name: "WireFrameModel_with_alpha/Decoder/conv2d/BiasAdd_WireFrameModel_with_alpha/Decoder/conv2d/Conv2D_WireFrameModel_with_alpha/Decoder/conv2d/BiasAdd/ReadVariableOp/resource1/y:0"
+  }
+  initializer {
+      dims: 32
+      dims: 192
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_9/filter:0"
+  }
+  initializer {
+      dims: 192
+      dims: 32
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_8/filter:0"
+  }
+  initializer {
+      dims: 32
+      dims: 144
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_7/filter:0"
+  }
+  initializer {
+      dims: 144
+      dims: 24
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_6/filter:0"
+  }
+  initializer {
+      dims: 24
+      dims: 144
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_5/filter:0"
+  }
+  initializer {
+      dims: 16
+      dims: 64
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_44/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 64
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "Conv2D_43/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 64
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "Conv2D_42/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 128
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "Conv2D_41/filter:0"
+  }
+  initializer {
+      dims: 128
+      dims: 128
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "Conv2D_40/filter:0"
+  }
+  initializer {
+      dims: 144
+      dims: 24
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_4/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 16
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_39/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 64
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_38/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 128
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "Conv2D_37/filter:0"
+  }
+  initializer {
+      dims: 128
+      dims: 128
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "Conv2D_36/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 24
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_35/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 64
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_34/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 128
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "Conv2D_33/filter:0"
+  }
+  initializer {
+      dims: 128
+      dims: 128
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "Conv2D_32/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 32
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_31/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 64
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_30/filter:0"
+  }
+  initializer {
+      dims: 24
+      dims: 96
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_3/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 128
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "Conv2D_29/filter:0"
+  }
+  initializer {
+      dims: 128
+      dims: 128
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "Conv2D_28/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 64
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_27/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 96
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_26/filter:0"
+  }
+  initializer {
+      dims: 96
+      dims: 576
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_25/filter:0"
+  }
+  initializer {
+      dims: 576
+      dims: 96
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_24/filter:0"
+  }
+  initializer {
+      dims: 96
+      dims: 576
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_23/filter:0"
+  }
+  initializer {
+      dims: 576
+      dims: 96
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_22/filter:0"
+  }
+  initializer {
+      dims: 96
+      dims: 384
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_21/filter:0"
+  }
+  initializer {
+      dims: 384
+      dims: 64
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_20/filter:0"
+  }
+  initializer {
+      dims: 96
+      dims: 16
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_2/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 384
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_19/filter:0"
+  }
+  initializer {
+      dims: 384
+      dims: 64
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_18/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 384
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_17/filter:0"
+  }
+  initializer {
+      dims: 384
+      dims: 64
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_16/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 384
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_15/filter:0"
+  }
+  initializer {
+      dims: 384
+      dims: 64
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_14/filter:0"
+  }
+  initializer {
+      dims: 64
+      dims: 192
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_13/filter:0"
+  }
+  initializer {
+      dims: 192
+      dims: 32
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_12/filter:0"
+  }
+  initializer {
+      dims: 32
+      dims: 192
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_11/filter:0"
+  }
+  initializer {
+      dims: 192
+      dims: 32
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_10/filter:0"
+  }
+  initializer {
+      dims: 16
+      dims: 32
+      dims: 1
+      dims: 1
+      data_type: 1
+      name: "Conv2D_1/filter:0"
+  }
+  initializer {
+      dims: 32
+      dims: 4
+      dims: 3
+      dims: 3
+      data_type: 1
+      name: "Conv2D/filter:0"
+  }
+  initializer {
+      data_type: 1
+      name: "ConstantFolding/WireFrameModel_with_alpha/tf_op_layer_RealDiv/RealDiv_recip:0"
+  }
+  initializer {
+      dims: 192
+      data_type: 1
+      name: "Add_9/y:0"
+  }
+  initializer {
+      dims: 192
+      data_type: 1
+      name: "Add_8/y:0"
+  }
+  initializer {
+      dims: 144
+      data_type: 1
+      name: "Add_7/y:0"
+  }
+  initializer {
+      dims: 144
+      data_type: 1
+      name: "Add_6/y:0"
+  }
+  initializer {
+      dims: 144
+      data_type: 1
+      name: "Add_5/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "Add_43/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "Add_42/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "Add_41/y:0"
+  }
+  initializer {
+      dims: 128
+      data_type: 1
+      name: "Add_40/y:0"
+  }
+  initializer {
+      dims: 144
+      data_type: 1
+      name: "Add_4/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "Add_39/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "Add_38/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "Add_37/y:0"
+  }
+  initializer {
+      dims: 128
+      data_type: 1
+      name: "Add_36/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "Add_35/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "Add_34/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "Add_33/y:0"
+  }
+  initializer {
+      dims: 128
+      data_type: 1
+      name: "Add_32/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "Add_31/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "Add_30/y:0"
+  }
+  initializer {
+      dims: 96
+      data_type: 1
+      name: "Add_3/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "Add_29/y:0"
+  }
+  initializer {
+      dims: 128
+      data_type: 1
+      name: "Add_28/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "Add_27/y:0"
+  }
+  initializer {
+      dims: 64
+      data_type: 1
+      name: "Add_26/y:0"
+  }
+  initializer {
+      dims: 576
+      data_type: 1
+      name: "Add_25/y:0"
+  }
+  initializer {
+      dims: 576
+      data_type: 1
+      name: "Add_24/y:0"
+  }
+  initializer {
+      dims: 576
+      data_type: 1
+      name: "Add_23/y:0"
+  }
+  initializer {
+      dims: 576
+      data_type: 1
+      name: "Add_22/y:0"
+  }
+  initializer {
+      dims: 384
+      data_type: 1
+      name: "Add_21/y:0"
+  }
+  initializer {
+      dims: 384
+      data_type: 1
+      name: "Add_20/y:0"
+  }
+  initializer {
+      dims: 96
+      data_type: 1
+      name: "Add_2/y:0"
+  }
+  initializer {
+      dims: 384
+      data_type: 1
+      name: "Add_19/y:0"
+  }
+  initializer {
+      dims: 384
+      data_type: 1
+      name: "Add_18/y:0"
+  }
+  initializer {
+      dims: 384
+      data_type: 1
+      name: "Add_17/y:0"
+  }
+  initializer {
+      dims: 384
+      data_type: 1
+      name: "Add_16/y:0"
+  }
+  initializer {
+      dims: 384
+      data_type: 1
+      name: "Add_15/y:0"
+  }
+  initializer {
+      dims: 384
+      data_type: 1
+      name: "Add_14/y:0"
+  }
+  initializer {
+      dims: 192
+      data_type: 1
+      name: "Add_13/y:0"
+  }
+  initializer {
+      dims: 192
+      data_type: 1
+      name: "Add_12/y:0"
+  }
+  initializer {
+      dims: 192
+      data_type: 1
+      name: "Add_11/y:0"
+  }
+  initializer {
+      dims: 192
+      data_type: 1
+      name: "Add_10/y:0"
+  }
+  initializer {
+      dims: 32
+      data_type: 1
+      name: "Add_1/y:0"
+  }
+  initializer {
+      dims: 32
+      data_type: 1
+      name: "Add/y:0"
+  }
+  initializer {
+      dims: 4
+      data_type: 7
+      name: "opt_Concat__211:0"
+  }
+  initializer {
+      dims: 4
+      data_type: 7
+      name: "opt_Concat__227:0"
+  }
+  initializer {
+      dims: 4
+      data_type: 7
+      name: "opt_Concat__245:0"
+  }
+  input {
+    name: "input_image_with_alpha:0"
+    type {
+      tensor_type {
+        elem_type: 1
+        shape {
+          dim {
+            dim_value: 1
+          }
+          dim {
+            dim_value: 512
+          }
+          dim {
+            dim_value: 512
+          }
+          dim {
+            dim_value: 4
+          }
+        }
+      }
+    }
+  }
+  output {
+    name: "Identity"
+    type {
+      tensor_type {
+        elem_type: 6
+        shape {
+          dim {
+            dim_value: 1
+          }
+          dim {
+            dim_value: 200
+          }
+          dim {
+            dim_value: 2
+          }
+        }
+      }
+    }
+  }
+  output {
+    name: "Identity_1"
+    type {
+      tensor_type {
+        elem_type: 1
+        shape {
+          dim {
+            dim_value: 1
+          }
+          dim {
+            dim_value: 200
+          }
+        }
+      }
+    }
+  }
+  output {
+    name: "Identity_2"
+    type {
+      tensor_type {
+        elem_type: 1
+        shape {
+          dim {
+            dim_value: 1
+          }
+          dim {
+            dim_value: 256
+          }
+          dim {
+            dim_value: 256
+          }
+          dim {
+            dim_value: 4
+          }
+        }
+      }
+    }
+  }
+}
+opset_import {
+  version: 11
+}
